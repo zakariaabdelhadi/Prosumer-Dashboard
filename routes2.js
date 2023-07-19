@@ -121,6 +121,7 @@ function getProducedElecInCurrentHour(req, res, next) {
         let tag = line.split(',')[1];
         let stunde = line.split(',')[2];
         // let [currMonat,currTag,currStunde] = getCurrentTime();
+
         if (line.split(',')[0] == monatparam && line.split(',')[1] == tagparam && line.split(',')[2] == stundeparam) {
             console.log(monat + '/' + tag + '/' + stunde);
             // readStream.close();
@@ -139,7 +140,7 @@ function getProducedElecInCurrentHour(req, res, next) {
     });
     readStream.on('end', () => {
 
-        res.send(value);
+        res.send(value)
         console.log('Reading complete')
         next();
     });
