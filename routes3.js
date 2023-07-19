@@ -8,7 +8,11 @@ const fs = require('fs');
 const readline = require('readline')
 
 
+
+
 router.get("/preise", getPreise, (req, res) => {
+
+
 
 
 });
@@ -33,7 +37,9 @@ function getPreise(req, res, next) {
         let stunde = line.split(',')[1].split(':')[0];
         let preis = line.split(',')[2];
 
-        //  console.log(tag, monat, jahr, stunde, preis);
+        //  console.log(tag, monat, stunde, preis);
+        // console.log(req.query.m, req.query.t, req.query.s);
+
 
         if (monat === req.query.m && tag === req.query.t && stunde === req.query.s) {
             console.log(monat + '/' + tag + '/' + stunde);
@@ -54,9 +60,11 @@ function getPreise(req, res, next) {
     });
     readStream.on('end', () => {
 
+        console.log(value)
         res.send(value);
         console.log('Reading complete')
         next();
+
     });
 };
 

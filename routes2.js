@@ -139,7 +139,7 @@ function getProducedElecInCurrentHour(req, res, next) {
     });
     readStream.on('end', () => {
 
-        res.send(value);
+        res.json(value);
         console.log('Reading complete')
         next();
     });
