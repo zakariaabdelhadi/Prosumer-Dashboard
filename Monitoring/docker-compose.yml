@@ -1,0 +1,22 @@
+version: '3.3'
+networks:
+  monitoring:
+    driver: bridge
+volumes:
+  prometheus_data: {}
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.34.0
+    
+    ports:
+      - 9090:9090
+  
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  grafana:
+    image: grafana/grafana:9.3.1
+
+    ports:
+      - 3000:3000
+

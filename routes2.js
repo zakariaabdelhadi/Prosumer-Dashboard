@@ -7,6 +7,9 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const readline = require('readline')
 
+const routes1_module = require('./routes1')
+const prom_client = require('prom-client')
+
 
 
 let heutevor = [], morgenvor = [], ubermorgenvor = [];
@@ -14,6 +17,13 @@ let lockMonat1 = true;
 let lockMonat2 = true;
 
 
+const register = routes1_module.wetter_register;
+const erzeugterStromGauge = new prom_client.Gauge({
+    name: 'erzeugterStrom_metric', // The name of the metric
+    help: 'gauge metric', // Help text describing the metric
+ //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
+  });
 router.get("/vorhersage", getProducedElecInvorhersage, (req, res) => {
 
 
@@ -39,7 +49,7 @@ function getProducedElecInvorhersage(req, res, next) {
     //let data = '';
     let counter = 0;
 
-    const readStream = fs.createReadStream('pvwatts_hourly.csv', 'utf-8');
+    const readStream = fs.createReadStream('daten/pvwatts_hourly.csv', 'utf-8');
     let rl = readline.createInterface({ input: readStream });
     rl.on('line', (line) => {
 
@@ -107,11 +117,14 @@ function getProducedElecInCurrentHour(req, res, next) {
     let monatparam = req.query.m;
     let tagparam = req.query.t;
     let stundeparam = req.query.s;
+
+    let [currMonat, currTag, currStunde] = getCurrentTime();
+
     //let data = '';
     let counter = 0;
     let value = 0;
 
-    const readStream = fs.createReadStream('pvwatts_hourly.csv', 'utf-8');
+    const readStream = fs.createReadStream('daten/pvwatts_hourly.csv', 'utf-8');
     let rl = readline.createInterface({ input: readStream });
     rl.on('line', (line) => {
 
@@ -122,10 +135,11 @@ function getProducedElecInCurrentHour(req, res, next) {
         let stunde = line.split(',')[2];
         // let [currMonat,currTag,currStunde] = getCurrentTime();
 
-        if (line.split(',')[0] == monatparam && line.split(',')[1] == tagparam && line.split(',')[2] == stundeparam) {
+        if (line.split(',')[0] == currMonat && line.split(',')[1] == currTag && line.split(',')[2] == currStunde) {
             console.log(monat + '/' + tag + '/' + stunde);
             // readStream.close();
             value = line.split(',')[10];
+            erzeugterStromGauge.set(parseInt(value));
         }
     });
     rl.on('close', () => {
@@ -140,7 +154,7 @@ function getProducedElecInCurrentHour(req, res, next) {
     });
     readStream.on('end', () => {
 
-        res.send(value)
+        res.json(value)
         console.log('Reading complete')
         next();
     });
