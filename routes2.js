@@ -1,8 +1,11 @@
 const express = require('express')
 const redis = require("redis");
 const router = express.Router();
+
 //import fetch from "node-fetch";
 const fetch = require('node-fetch');
+const axios = require('axios');
+
 // read.js
 const fs = require('fs');
 const readline = require('readline')
@@ -11,12 +14,11 @@ const routes1_module = require('./routes1')
 const prom_client = require('prom-client')
 
 
-
 let heutevor = [], morgenvor = [], ubermorgenvor = [];
 let lockMonat1 = true;
 let lockMonat2 = true;
 
-
+const NREL_KEY =  'bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB'; 
 const register = routes1_module.wetter_register;
 const erzeugterStromGauge = new prom_client.Gauge({
     name: 'erzeugterStrom_metric', // The name of the metric
@@ -24,6 +26,44 @@ const erzeugterStromGauge = new prom_client.Gauge({
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
     registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
+
+  router.get("/electGen", async (req, res) => {
+
+
+    const options = {
+      method: 'GET',
+      url: 'https://developer.nrel.gov/api/pvwatts/v8.json',
+      params: {
+        system_capacity: '15',
+        module_type:'0',
+        losses: '10',
+        array_type:'1',
+        tilt:'30',
+        azimuth : '80',
+        dataset: 'intl',
+        timeframe:'hourly',
+        lat: '52.5162',
+        lon: '13.3777'
+      },
+      headers: {
+        'X-Api-Key': 'bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB',
+        'X-RapidAPI-Host': 'https://developer.nrel.gov'
+      }
+    };
+    
+    try {
+        const response = await axios.request(options);
+        let index = getCurrentHourIndexInYear();
+        let value = response.data.outputs.ac[index]
+        erzeugterStromGauge.set(parseInt(value))
+
+        res.json(value);
+    } catch (error) {
+        console.error(error);
+    }
+   
+
+});
 router.get("/vorhersage", getProducedElecInvorhersage, (req, res) => {
 
 
@@ -173,5 +213,12 @@ function getCurrentTime() {
     return [monat, tag, stunde];
 
 }
-
+function getCurrentHourIndexInYear() {
+    const now = new Date();
+    const yearStart = new Date(now.getFullYear(), 0, 0); // January 0th is the last day of the previous year
+    const timeDiff = now - yearStart;
+    const hourIndex = Math.floor(timeDiff / (1000 * 60 * 60)); // Convert milliseconds to hours
+    return hourIndex;
+  }
+  
 module.exports = router;

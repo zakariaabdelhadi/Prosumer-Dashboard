@@ -9,7 +9,8 @@ const fs = require('fs');
 const readline = require('readline')
 
 const routes1_module = require('./routes1')
-const prom_client = require('prom-client')
+const prom_client = require('prom-client');
+const { log } = require('console');
 
 
 
@@ -22,7 +23,11 @@ const stromVerbrauchGauge = new prom_client.Gauge({
   });
 
 
-  let [stunde,minute] = getCurrentTime();
+  let [stunde,minute] = getCurrentTimeCustom();
+  let [monat,tag,std,min] = getCurrentTime();
+
+
+
 
   router.get("/", getVerbrauch, (req, res) => {
 
@@ -30,6 +35,67 @@ const stromVerbrauchGauge = new prom_client.Gauge({
 
 
   });
+  router.get("/consumption", getConsumption, (req, res) => {
+
+  
+
+
+  });
+
+
+  function getConsumption(req, res, next) {
+
+
+    let counter = 0;
+    let value = 0;
+
+
+    const readStream = fs.createReadStream('daten/household_power_consumption_2023.csv', 'utf-8');
+    let rl = readline.createInterface({ input: readStream });
+    rl.on('line', (line) => {
+        counter++;
+
+
+        let heute = line.split(';')[0];
+        let zeit = line.split(';')[1];
+        let verbrauch = parseInt(line.split(';')[6]) +parseInt(line.split(';')[7]) +parseInt(line.split(';')[8]);
+
+        //console.log(heute +'--------------'+tag+'/'+monat);
+  
+        if (zeit == std+':'+min  && heute == tag+'/'+monat) {
+
+            console.log(zeit == std+':'+min )
+            console.log(heute == 1+'/'+1 )
+            console.log(zeit)
+            console.log(heute)
+
+            value = verbrauch;
+            stromVerbrauchGauge.set(parseInt(value))
+        }
+
+
+    });
+    rl.on('close', () => {
+        console.log(`About ${counter} areas have geographic units of over 200 units in 2020`)
+        console.log('Data parsing completed');
+    });
+
+    readStream.on('error', (error) => console.log(error.message));
+    readStream.on('data', (chunk) => {
+
+        // console.log(chunk)
+    });
+    readStream.on('end', () => {
+
+        console.log(value)
+        res.json(value);
+        console.log('Reading complete')
+        next();
+
+    });
+
+
+  }
 
   function getVerbrauch(req, res, next) {
 
@@ -74,7 +140,7 @@ const stromVerbrauchGauge = new prom_client.Gauge({
     });
 };
 
-function getCurrentTime() {
+function getCurrentTimeCustom() {
 
 
     let jetzt = new Date();
@@ -87,6 +153,20 @@ function getCurrentTime() {
 
 
     return [stunde,minute];
+
+}
+function getCurrentTime() {
+
+
+    let jetzt = new Date();
+    let monat = jetzt.getMonth() + 1; // Januar ist 0, daher muss 1 hinzugefügt werden
+    let tag = jetzt.getDate();
+    let stunde = jetzt.getHours();
+    let minute = jetzt.getMinutes();
+
+
+
+    return [monat, tag, stunde,minute];
 
 }
 

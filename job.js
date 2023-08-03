@@ -3,9 +3,11 @@ const axios = require('axios');
 // Eine Menge von URLs
 const urls = [
   'http://localhost:5001/api/wetter/wetter-current',
-  'http://localhost:5001/api/strom/current',
-  'http://localhost:5001/api/markt/preise',
-  'http://localhost:5001/api/verbrauch/'
+  //'http://localhost:5001/api/strom/current',
+  'http://localhost:5001/api/markt/preis',
+  'http://localhost:5001/api/verbrauch/consumption',
+  'http://localhost:5001/api/strom/electGen'
+  
   // Weitere URLs hier...
 ];
 
@@ -23,7 +25,7 @@ async function fetchUrl(url) {
  async function fetchAllUrls(urls) {
   for (const url of urls) {
     
-     await    fetchUrl(url);
+     await  fetchUrl(url);
    
   }
 

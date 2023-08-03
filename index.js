@@ -20,7 +20,7 @@ const axios = require('axios');
 const urls = [
     'http://localhost:5001/api/wetter/wetter-current',
     'http://localhost:5001/api/strom/current',
-    'http://localhost:5001/api/markt/preise',
+    'http://localhost:5001/api/markt/preis',
     'http://localhost:5001/api/verbrauch/'
     // Weitere URLs hier...
   ];
