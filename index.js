@@ -1,9 +1,9 @@
 const express = require('express');
 const path = require('path');
 const logger = require('./logger')
-const routes1_module = require('./routes1')
-const router2 = require('./routes2')
-const router3 = require('./routes3')
+const routes1_module = require('./WetterApiRoutes')
+const router2 = require('./StromGenApiRoutes')
+const router3 = require('./PreisPrognoseApiRoutes')
 const router4 = require('./VerbrauchAPIRoute.js')
 const job = require('./job.js')
 
@@ -14,17 +14,6 @@ const prom_client = require('prom-client');
 const { Module } = require('module');
 
 const axios = require('axios');
-
-
-// Eine Menge von URLs
-const urls = [
-    'http://localhost:5001/api/wetter/wetter-current',
-    'http://localhost:5001/api/strom/current',
-    'http://localhost:5001/api/markt/preis',
-    'http://localhost:5001/api/verbrauch/'
-    // Weitere URLs hier...
-  ];
-
 
 
 

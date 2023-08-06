@@ -10,7 +10,7 @@ const axios = require('axios');
 const fs = require('fs');
 const readline = require('readline')
 
-const routes1_module = require('./routes1')
+const routes1_module = require('./WetterApiRoutes')
 const prom_client = require('prom-client')
 
 
@@ -183,7 +183,7 @@ function getProducedElecInCurrentHour(req, res, next) {
         }
     });
     rl.on('close', () => {
-        console.log(`About ${counter} areas have geographic units of over 200 units in 2020`)
+      //  console.log(` ${counter} pv werte gelesen`)
         console.log('Data parsing completed');
     });
 
@@ -195,7 +195,7 @@ function getProducedElecInCurrentHour(req, res, next) {
     readStream.on('end', () => {
 
         res.json(value)
-        console.log('Reading complete')
+        console.log('Reading PV-Watts values complete')
         next();
     });
 };

@@ -8,7 +8,7 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const readline = require('readline')
 
-const routes1_module = require('./routes1')
+const routes1_module = require('./WetterApiRoutes')
 const prom_client = require('prom-client');
 const { log } = require('console');
 
@@ -64,11 +64,6 @@ const stromVerbrauchGauge = new prom_client.Gauge({
   
         if (zeit == std+':'+min  && heute == tag+'/'+monat) {
 
-            console.log(zeit == std+':'+min )
-            console.log(heute == 1+'/'+1 )
-            console.log(zeit)
-            console.log(heute)
-
             value = verbrauch;
             stromVerbrauchGauge.set(parseInt(value))
         }
@@ -76,8 +71,8 @@ const stromVerbrauchGauge = new prom_client.Gauge({
 
     });
     rl.on('close', () => {
-        console.log(`About ${counter} areas have geographic units of over 200 units in 2020`)
-        console.log('Data parsing completed');
+      //  console.log(` ${counter} verbrauchtsdaten gelesen`)
+        console.log('Data parsing Haushaltsverbrauchtsdaten completed');
     });
 
     readStream.on('error', (error) => console.log(error.message));
@@ -87,9 +82,9 @@ const stromVerbrauchGauge = new prom_client.Gauge({
     });
     readStream.on('end', () => {
 
-        console.log(value)
+        //console.log(value)
         res.json(value);
-        console.log('Reading complete')
+        console.log('Reading HaushaltsverbrauchDaten complete')
         next();
 
     });

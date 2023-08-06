@@ -10,7 +10,7 @@ const axios = require('axios');
 const fs = require('fs');
 const readline = require('readline')
 
-const routes1_module = require('./routes1')
+const routes1_module = require('./WetterApiRoutes')
 
 const prom_client = require('prom-client')
 
@@ -59,17 +59,16 @@ try {
 
         let marketPreis =element.marketprice;
         let localPreis = element.localprice;
-    
+      //  const date1 = new Date(1691308800000);
+
         const date1 = new Date(element.start_timestamp);
         const date2 = new Date(element.end_timestamp);
      
-        const config =  { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'};
+        const config =  { year: '2-digit' ,day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'};
         let startTime = new Intl.DateTimeFormat('de-DE', config).format(date1);
         let endTime = new Intl.DateTimeFormat('de-DE', config).format(date2);
 
-
-        console.log(tag == date1.getDay()+'/'+std == date1.getHours() +'/'+  min == date1.getMinutes())
-        if(tag == date1.getDay() && std == date1.getHours() && min == date1.getMinutes())
+        if(tag == date1.getDate() && std == date1.getHours() && min == date1.getMinutes())
         {    
             list.push({"marketPreis":marketPreis,"localPreis":localPreis,"startTime":startTime,"endTime":endTime});
  
@@ -133,7 +132,7 @@ function getPreise(req, res, next) {
 
     });
     rl.on('close', () => {
-        console.log(`About ${counter} areas have geographic units of over 200 units in 2020`)
+        console.log(`${counter} preis data gelesen`)
         console.log('Data parsing completed');
     });
 
@@ -146,7 +145,7 @@ function getPreise(req, res, next) {
 
         console.log(value)
         res.send(value);
-        console.log('Reading complete')
+        console.log('Reading preis datei complete')
         next();
 
     });
