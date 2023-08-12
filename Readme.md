@@ -10,5 +10,5 @@ https://rapidapi.com/stromdao-stromdao-default/api/marktdaten-deutschland/
 
 
 
-<h2>3-strom Erzeugung durch PV aNLAGEN API</h2>
+<h2>3-strom Erzeugung durch PV Anlagen API</h2>
 https://developer.nrel.gov/
