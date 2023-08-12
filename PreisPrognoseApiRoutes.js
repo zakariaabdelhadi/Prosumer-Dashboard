@@ -29,7 +29,12 @@ const stromLocalPreisGauge = new prom_client.Gauge({
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
     registers: [routes1_module.wetter_register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
-
+  const stromPreisGauge = new prom_client.Gauge({
+    name: 'strom_preis_metric', // The name of the metric
+    help: 'gauge metric', // Help text describing the metric
+ //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
+    registers: [routes1_module.wetter_register], // (Optional) Register the metric with the custom registry (default is the default registry)
+  });
   let [m,t,s] = getCurrentTime();
 
 router.get("/preis", async (req, res) => {
@@ -37,15 +42,25 @@ router.get("/preis", async (req, res) => {
 
 
 
-const options = {
+const optionsOld = {
     method: 'GET',
-    url: ' https://api.corrently.io/v2.0/gsi/marketdata',
+    url: 'https://api.corrently.io/v2.0/gsi/marketdata',
     params: {zip: '10963'},
 
   };
   
+  const options = {
+    method: 'GET',
+    url: 'https://marktdaten-deutschland.p.rapidapi.com/marketdata',
+    params: {zip: '10963'},
+    headers: {
+      'X-RapidAPI-Key': '9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78',
+      'X-RapidAPI-Host': 'marktdaten-deutschland.p.rapidapi.com'
+    }
+  };
 
 try {
+
 	const response = await axios.request(options);
 
     let value = response.data.data;
@@ -81,7 +96,7 @@ try {
     stromLocalPreisGauge.set((parseFloat(list[0].localPreis/1000)))
     stromMarketPreisGauge.set((parseFloat(list[0].marketPreis/1000)))
 
-    res.json(list)
+    res.json({"value":list[0].localPreis/1000})
 } catch (error) {
 	console.error(error);
 }
@@ -91,65 +106,12 @@ try {
 
 });
 
-function getPreise(req, res, next) {
+router.get("/preisOld", getPreiseOld, (req, res) => {
 
 
-
-    let counter = 0;
-    let value = 0;
-
-    const readStream = fs.createReadStream('daten/preise.csv', 'utf-8');
-    let rl = readline.createInterface({ input: readStream });
-    rl.on('line', (line) => {
-        counter++;
+})
 
 
-        let tag = line.split(',')[0].split('.')[0];
-        let monat = line.split(',')[0].split('.')[1];
-        let stunde = line.split(',')[1].split(':')[0];
-        let preis = line.split(',')[2];
-
-        //  console.log(tag, monat, stunde, preis);
-        // console.log(req.query.m, req.query.t, req.query.s);
-
-
-       // if (monat === req.query.m && tag === req.query.t && stunde === req.query.s) {
-        //console.log( `---------------monat ${m} tag ${t} Stunde ${s} --------------`)
-
-        //da es nur Daten für Mai gibt 
-        m= '05' //MAi
-        t= 14 //Tag
-        
-  
-
-        if (monat == m && tag == t && stunde == s) {
-
-            console.log(monat + '/' + tag + '/' + stunde);
-            value = preis;
-            stromPreisGauge.set(parseInt(value))
-        }
-
-
-    });
-    rl.on('close', () => {
-        console.log(`${counter} preis data gelesen`)
-        console.log('Data parsing completed');
-    });
-
-    readStream.on('error', (error) => console.log(error.message));
-    readStream.on('data', (chunk) => {
-
-        // console.log(chunk)
-    });
-    readStream.on('end', () => {
-
-        console.log(value)
-        res.send(value);
-        console.log('Reading preis datei complete')
-        next();
-
-    });
-};
 
 function getPreiseOld(req, res, next) {
 
@@ -169,31 +131,21 @@ function getPreiseOld(req, res, next) {
         let stunde = line.split(',')[1].split(':')[0];
         let preis = line.split(',')[2];
 
-        //  console.log(tag, monat, stunde, preis);
-        // console.log(req.query.m, req.query.t, req.query.s);
-
-
-       // if (monat === req.query.m && tag === req.query.t && stunde === req.query.s) {
-        //console.log( `---------------monat ${m} tag ${t} Stunde ${s} --------------`)
-
-        //da es nur Daten für Mai gibt 
+       
         m= '05' //MAi
         t= 14 //Tag
         
   
 
         if (monat == m && tag == t && stunde == s) {
-
-            console.log(monat + '/' + tag + '/' + stunde);
-            value = preis;
-            stromPreisGauge.set(parseInt(value))
+            value = parseFloat((preis/1000).toFixed(5));
+            stromPreisGauge.set(value); //preis pro kWh
         }
 
 
     });
     rl.on('close', () => {
-        console.log(`About ${counter} areas have geographic units of over 200 units in 2020`)
-        console.log('Data parsing completed');
+        console.log('Data parsing Preisdaten completed');
     });
 
     readStream.on('error', (error) => console.log(error.message));
@@ -203,9 +155,8 @@ function getPreiseOld(req, res, next) {
     });
     readStream.on('end', () => {
 
-        console.log(value)
-        res.send(value);
-        console.log('Reading complete')
+        res.json({"value":value}); //preis pro kWh
+        console.log('Reading Preisdaten complete')
         next();
 
     });

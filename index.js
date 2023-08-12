@@ -4,7 +4,7 @@ const logger = require('./logger')
 const routes1_module = require('./WetterApiRoutes')
 const router2 = require('./StromGenApiRoutes')
 const router3 = require('./PreisPrognoseApiRoutes')
-const router4 = require('./VerbrauchAPIRoute.js')
+const router4 = require('./VerbrauchApiRoutes.js')
 const job = require('./job.js')
 
 const bodyparser = require('body-parser')
@@ -29,7 +29,7 @@ app.use("/api/markt", router3);
 app.use("/api/verbrauch", router4);
 
   // Starte den Job
- job();
+job();
     
 app.listen(PORT, () => {
     console.log(`app running on port: ${PORT}`)

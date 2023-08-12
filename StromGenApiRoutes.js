@@ -57,7 +57,7 @@ const erzeugterStromGauge = new prom_client.Gauge({
         let value = response.data.outputs.ac[index]
         erzeugterStromGauge.set(parseInt(value))
 
-        res.json(value);
+        res.json({"value":value});
     } catch (error) {
         console.error(error);
     }

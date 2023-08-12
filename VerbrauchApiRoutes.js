@@ -82,8 +82,8 @@ const stromVerbrauchGauge = new prom_client.Gauge({
     });
     readStream.on('end', () => {
 
-        //console.log(value)
-        res.json(value);
+     //   console.log(value.va)
+        res.json({"value":value});
         console.log('Reading HaushaltsverbrauchDaten complete')
         next();
 
