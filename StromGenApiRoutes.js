@@ -34,7 +34,7 @@ const erzeugterStromGauge = new prom_client.Gauge({
       method: 'GET',
       url: 'https://developer.nrel.gov/api/pvwatts/v8.json',
       params: {
-        system_capacity: '15',
+        system_capacity: '15', //Die übliche Speicherkapazität für Ein- und Mehrfamilienhäuser liegt bei etwa 4 kWh bis 16 kWh.
         module_type:'0',
         losses: '10',
         array_type:'1',

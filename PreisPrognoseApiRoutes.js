@@ -70,7 +70,7 @@ try {
 
         if(tag == date1.getDate() && std == date1.getHours() && min == date1.getMinutes())
         {    
-            list.push({"marketPreis":marketPreis,"localPreis":localPreis,"startTime":startTime,"endTime":endTime});
+            list.push({"marketPreis":marketPreis/1000,"localPreis":localPreis/1000,"startTime":startTime,"endTime":endTime});
  
         }
 
@@ -78,8 +78,8 @@ try {
     });
    
 
-    stromLocalPreisGauge.set(parseInt(list[0].localPreis))
-    stromMarketPreisGauge.set(parseInt(list[0].marketPreis))
+    stromLocalPreisGauge.set((parseFloat(list[0].localPreis/1000)))
+    stromMarketPreisGauge.set((parseFloat(list[0].marketPreis/1000)))
 
     res.json(list)
 } catch (error) {
