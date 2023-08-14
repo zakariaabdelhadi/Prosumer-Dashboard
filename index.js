@@ -30,7 +30,7 @@ app.use("/api/verbrauch", router4);
 
   // Starte den Job
 job();
-    
+
 app.listen(PORT, () => {
     console.log(`app running on port: ${PORT}`)
 })
