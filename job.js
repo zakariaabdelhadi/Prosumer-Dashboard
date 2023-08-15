@@ -58,7 +58,7 @@ async function fetchUrl(url) {
     await  fetchUrl(url);
   }
   
-  energyManagementSystem(generatedPower.data.value,householdLoad.data.value,electricityPrice.data.value);
+  energyManagementSystem(generatedPower.data.value/1000,householdLoad.data.value/1000,electricityPrice.data.value/1000);
 
 
 }

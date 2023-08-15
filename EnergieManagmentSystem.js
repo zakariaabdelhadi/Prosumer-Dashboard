@@ -15,18 +15,31 @@ const batterieStandGauge = new prom_client.Gauge({
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
     registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
-  const gekaufterStromGauge = new prom_client.Gauge({
+  const gekaufterStromCounter = new prom_client.Counter({
     name: 'gekaufter_strom_metric', // The name of the metric
-    help: 'gauge metric', // Help text describing the metric
+    help: 'counter metric', // Help text describing the metric
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
     registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
-  const eingespeisterStromGauge = new prom_client.Gauge({
+  const ausgabeStromCounter = new prom_client.Counter({
+    name: 'ausgabe_strom_metric', // The name of the metric
+    help: 'counter metric', // Help text describing the metric
+ //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
+  });
+  const eingespeisterStromCounter = new prom_client.Counter({
     name: 'eingespeister_strom_metric', // The name of the metric
-    help: 'gauge metric', // Help text describing the metric
+    help: 'counter metric', // Help text describing the metric
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
     registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
+  const earnStromCounter = new prom_client.Counter({
+    name: 'earning_strom_metric', // The name of the metric
+    help: 'counter metric', // Help text describing the metric
+ //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
+  });
+
 
 
 
@@ -40,7 +53,7 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
     let geschirspueler = 0; // 0.4 kWh pro spülgang
     let waermepimpe = 0; //Wärmepumpe mit einer Leistung von etwa 5 kW --> 2kWh pro Stunde
    // let auto = 0;
-    const batteryCapacity = 15000; // Beispielkapazität in Wh
+    const batteryCapacity = 15; // Beispielkapazität in kWh
     let batterySOC = 0.5; // Beispiel-Startladestand der Batterie in kWh
     let gekaufterStrom = 0;
     let eingespeisterStrom = 0;
@@ -72,8 +85,10 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
         }
 
         batterieStandGauge.set(batterySOC);
-        gekaufterStromGauge.set(gekaufterStrom);
-        eingespeisterStromGauge.set(eingespeisterStrom);
+        gekaufterStromCounter.inc(gekaufterStrom);
+        ausgabeStromCounter.inc(gekaufterStrom*electricityPrice)
+        eingespeisterStromCounter.inc(eingespeisterStrom);
+        earnStromCounter.inc(eingespeisterStrom*electricityPrice)
 
     }
 
