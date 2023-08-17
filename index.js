@@ -14,6 +14,7 @@ const prom_client = require('prom-client');
 const { Module } = require('module');
 
 const axios = require('axios');
+require('dotenv').config();
 
 
 

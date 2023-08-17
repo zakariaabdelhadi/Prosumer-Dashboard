@@ -4,9 +4,9 @@ const energyManagementSystem = require('./EnergieManagmentSystem.js')
 // Eine Menge von URLs
 const urls = [
   'http://localhost:5001/api/wetter/wetter-current',
-  'http://localhost:5001/api/markt/preisOld',
   'http://localhost:5001/api/verbrauch/consumption',
-  'http://localhost:5001/api/strom/electGen'
+  'http://localhost:5001/api/strom/electGen',
+  'http://localhost:5001/api/markt/preis'
     //'http://localhost:5001/api/strom/current',
 
   // Weitere URLs hier...
@@ -19,7 +19,7 @@ async function fetchUrl(url) {
   try {
     switch(url){
 
-      case 'http://localhost:5001/api/markt/preisOld': 
+      case 'http://localhost:5001/api/markt/preis': 
 
       //try{
       //  electricityPrice = householdLoad = await axios.get('http://localhost:5001/api/markt/preis');
@@ -71,7 +71,7 @@ async function fetchUrl(url) {
     // Setze das Intervall für alle Viertelstunden (15 * 60 * 1000 ms = 900000 ms)
     setInterval(() => {
       fetchAllUrls(urls);
-    }, 30000);
+    }, 900000);
 
 
   }

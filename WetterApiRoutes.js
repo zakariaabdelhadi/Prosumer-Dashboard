@@ -3,11 +3,13 @@ const router = express.Router();
 //import fetch from "node-fetch";
 const fetch = require('node-fetch');
 const prom_client = require('prom-client')
+require('dotenv').config();
+
 // Create a Registry which registers the metrics
 const wetter_register = new prom_client.Registry()
 
 
-const OPEN_WEATHER_API = 'd11ad90a4ab6e0b72bf65e5ce7970f92';
+const OPEN_WEATHER_API = process.env.OPEN_WEATHER_API;
 
 
   const temperaturGauge = new prom_client.Gauge({
@@ -47,7 +49,6 @@ const OPEN_WEATHER_API = 'd11ad90a4ab6e0b72bf65e5ce7970f92';
 });
 
 router.get("/wetter-current", (req, res) => {
-
 
     // install node-fetch module
     //this link is to use for forecast 

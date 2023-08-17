@@ -20,10 +20,3 @@ services:
     ports:
       - 3000:3000
 
- # prosumerapp:
-  
-    #image: prosumer_app:latest
-
-    #ports:
-     # - 5001:5001    
-

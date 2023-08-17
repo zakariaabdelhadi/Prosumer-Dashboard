@@ -5,7 +5,7 @@ const router = express.Router();
 //import fetch from "node-fetch";
 const fetch = require('node-fetch');
 const axios = require('axios');
-
+require('dotenv').config();
 // read.js
 const fs = require('fs');
 const readline = require('readline')
@@ -41,7 +41,7 @@ router.get("/preis", async (req, res) => {
 
 
 
-
+console.log(process.env.PREISE_API_KEY)
 const optionsOld = {
     method: 'GET',
     url: 'https://api.corrently.io/v2.0/gsi/marketdata',
@@ -54,7 +54,7 @@ const optionsOld = {
     url: 'https://marktdaten-deutschland.p.rapidapi.com/marketdata',
     params: {zip: '10963'},
     headers: {
-      'X-RapidAPI-Key': '9d0fa79f58msh0f17d31a9e3cec0p178bc2jsn3619ac449c78',
+      'X-RapidAPI-Key': process.env.PREISE_API_KEY,
       'X-RapidAPI-Host': 'marktdaten-deutschland.p.rapidapi.com'
     }
   };

@@ -13,6 +13,7 @@ const readline = require('readline')
 const routes1_module = require('./WetterApiRoutes')
 const prom_client = require('prom-client')
 
+require('dotenv').config();
 
 let heutevor = [], morgenvor = [], ubermorgenvor = [];
 let lockMonat1 = true;
@@ -29,12 +30,12 @@ const erzeugterStromGauge = new prom_client.Gauge({
 
   router.get("/electGen", async (req, res) => {
 
-
+console.log( process.env.NREL_PVWATT_KEY)
     const options = {
       method: 'GET',
       url: 'https://developer.nrel.gov/api/pvwatts/v8.json',
       params: {
-        system_capacity: '15', //Die übliche Speicherkapazität für Ein- und Mehrfamilienhäuser liegt bei etwa 4 kWh bis 16 kWh.
+        system_capacity: '15', //Die übliche Speicherkapazität für Ein- und Mehrfamilienhäuser liegt bei etwa 4 kW bis 16 kW.
         module_type:'0',
         losses: '10',
         array_type:'1',
@@ -46,7 +47,7 @@ const erzeugterStromGauge = new prom_client.Gauge({
         lon: '13.3777'
       },
       headers: {
-        'X-Api-Key': 'bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB',
+        'X-Api-Key': process.env.NREL_PVWATT_KEY,
         'X-RapidAPI-Host': 'https://developer.nrel.gov'
       }
     };
