@@ -41,7 +41,6 @@ router.get("/preis", async (req, res) => {
 
 
 
-console.log(process.env.PREISE_API_KEY)
 const optionsOld = {
     method: 'GET',
     url: 'https://api.corrently.io/v2.0/gsi/marketdata',
