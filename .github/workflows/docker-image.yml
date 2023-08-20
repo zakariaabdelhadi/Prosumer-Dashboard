@@ -3,13 +3,21 @@ name: Node.js CI/CD with Docker
 on:
   push:
     branches:
-      - master  # Change this to your main branch name
+      - masterNew  # Change this to your main branch name
 
 jobs:
+    
   build:
     runs-on: ubuntu-latest
     
     steps:
+    - name: create env file
+      run: |
+        touch .env
+        echo OPEN_WEATHER_API=${{ secrets.WETTER_KEY }} >> .env
+        echo NREL_PVWATT_KEY=${{ secrets.STROM_KEY }} >> .env
+        echo PREISE_API_KEY=${{ secrets.PREIS_KEY }} >> .env
+
     - name: Checkout code
       uses: actions/checkout@v2
     
