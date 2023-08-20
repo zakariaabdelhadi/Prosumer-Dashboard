@@ -17,27 +17,18 @@ const { log } = require('console');
 const register = routes1_module.wetter_register;
 const stromVerbrauchGauge = new prom_client.Gauge({
     name: 'strom_verbrauch_metric', // The name of the metric
-    help: 'gauge metric', // Help text describing the metric
+    help: 'gauge metric Wh', // Help text describing the metric
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
-    registers: [routes1_module.wetter_register], // (Optional) Register the metric with the custom registry (default is the default registry)
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
 
 
   let [stunde,minute] = getCurrentTimeCustom();
   let [monat,tag,std,min] = getCurrentTime();
 
-
-
-
-  router.get("/", getVerbrauch, (req, res) => {
-
-
-
-
-  });
-  router.get("/consumption", getConsumption, (req, res) => {
-
   
+
+  router.get("/consumption", getConsumption, (req, res) => {
 
 
   });
@@ -92,23 +83,31 @@ const stromVerbrauchGauge = new prom_client.Gauge({
 
   }
 
-  function getVerbrauch(req, res, next) {
 
+  router.get("/consumptionNew", getConsumption2, (req, res) => {
+
+
+  });
+
+
+  function getConsumption2(req, res, next) {
 
 
     let counter = 0;
     let value = 0;
 
-    const readStream = fs.createReadStream('daten/Realisierter_Stromverbrauch_viertelstunde.csv', 'utf-8');
+
+    const readStream = fs.createReadStream('daten/ConsommationParHeure.csv', 'utf-8');
     let rl = readline.createInterface({ input: readStream });
     rl.on('line', (line) => {
         counter++;
 
 
-        let zeit = line.split(';')[1];
-        let verbrauch = line.split(';')[3];
+        let zeit = line.split(';')[0];
+        let verbrauch = parseInt(line.split(';')[1]);
+
   
-        if (zeit == stunde+':'+minute) {
+        if (zeit == stunde+':'+minute ) {
             value = verbrauch;
             stromVerbrauchGauge.set(parseInt(value))
         }
@@ -116,8 +115,8 @@ const stromVerbrauchGauge = new prom_client.Gauge({
 
     });
     rl.on('close', () => {
-        console.log(`About ${counter} areas have geographic units of over 200 units in 2020`)
-        console.log('Data parsing completed');
+      //  console.log(` ${counter} verbrauchtsdaten gelesen`)
+        console.log('Data parsing Haushaltsverbrauchtsdaten completed');
     });
 
     readStream.on('error', (error) => console.log(error.message));
@@ -127,13 +126,16 @@ const stromVerbrauchGauge = new prom_client.Gauge({
     });
     readStream.on('end', () => {
 
-        console.log(value)
-        res.send(value);
-        console.log('Reading complete')
+     //   console.log(value.va)
+        res.json({"value":value});
+        console.log('Reading HaushaltsverbrauchDaten complete')
         next();
 
     });
-};
+
+
+  }
+
 
 function getCurrentTimeCustom() {
 
@@ -142,9 +144,8 @@ function getCurrentTimeCustom() {
     let stunde = jetzt.getHours();
     let minute = jetzt.getMinutes();
 
-    minute = Math.floor(minute / 15) * 15;
+    minute = '00';
 
-    if(minute=='0') minute='00'
 
 
     return [stunde,minute];

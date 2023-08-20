@@ -35,18 +35,7 @@ const OPEN_WEATHER_API = process.env.OPEN_WEATHER_API;
 //  app: 'Wetter-Daten'
 //})
   
-  router.get('/metrics', async (req, res) =>
-{
 
-    try {
-        const metrics = await wetter_register.metrics();
-        res.setHeader('Content-Type',wetter_register.contentType)
-        res.end(metrics);
-      } catch (ex) {
-        res.status(500).end(ex);
-      }
-  //  wetter_register.metrics().then(data => res.status(200).send(data))
-});
 
 router.get("/wetter-current", (req, res) => {
 

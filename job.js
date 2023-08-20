@@ -1,12 +1,13 @@
 const axios = require('axios');
 const energyManagementSystem = require('./EnergieManagmentSystem.js')
 
+
 // Eine Menge von URLs
 const urls = [
   'http://localhost:5001/api/wetter/wetter-current',
-  'http://localhost:5001/api/verbrauch/consumption',
+  'http://localhost:5001/api/verbrauch/consumptionNew',
   'http://localhost:5001/api/strom/electGen',
-  'http://localhost:5001/api/markt/preis'
+  'http://localhost:5001/api/markt/preisOld'
     //'http://localhost:5001/api/strom/current',
 
   // Weitere URLs hier...
@@ -19,20 +20,14 @@ async function fetchUrl(url) {
   try {
     switch(url){
 
-      case 'http://localhost:5001/api/markt/preis': 
+      case 'http://localhost:5001/api/markt/preisOld': 
 
-      //try{
-      //  electricityPrice = householdLoad = await axios.get('http://localhost:5001/api/markt/preis');
-    //  }catch{
-        electricityPrice = householdLoad = await axios.get(url);
-
-      //}
       
-      
-      return electricityPrice;
+        electricityPrice  = await axios.get(url);  
+        return electricityPrice;
       
 
-      case 'http://localhost:5001/api/verbrauch/consumption': 
+      case 'http://localhost:5001/api/verbrauch/consumptionNew': 
       householdLoad = await axios.get(url);
       return householdLoad.data.value;
 
@@ -48,7 +43,7 @@ async function fetchUrl(url) {
    
  //   console.log(`URL ${url} wurde aufgerufen. Antwort:`, response.data);
   } catch (error) {
-//    console.error(`Fehler beim Aufrufen von URL ${url}:`, error.message);
+    console.error(`Fehler beim Aufrufen von URL ${url}:`, error.message);
   }
 }
 
@@ -56,10 +51,12 @@ async function fetchUrl(url) {
  async function fetchAllUrls(urls) {
   for (const url of urls) {
     await  fetchUrl(url);
-  }
-  
-  energyManagementSystem(generatedPower.data.value/1000,householdLoad.data.value/1000,electricityPrice.data.value/1000);
+   
 
+  }
+  energyManagementSystem(generatedPower.data.value/1000,householdLoad.data.value/1000,electricityPrice.data.value/10);
+
+  
 
 }
 
@@ -67,13 +64,13 @@ async function fetchUrl(url) {
 
 
     fetchAllUrls(urls);
-  
     // Setze das Intervall für alle Viertelstunden (15 * 60 * 1000 ms = 900000 ms)
     setInterval(() => {
       fetchAllUrls(urls);
+
     }, 900000);
 
 
   }
   
-  
+ 

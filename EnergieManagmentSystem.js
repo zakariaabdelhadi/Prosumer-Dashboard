@@ -48,6 +48,9 @@ const batterieStandGauge = new prom_client.Gauge({
 
   
 function simulateEnergyManagement(generatedPower, householdLoad, electricityPrice) {
+
+  electricityPrice =  getGesamtPreis(electricityPrice);        
+  
   console.log(generatedPower+'-'+householdLoad+'-'+ electricityPrice)
     let waschmaschine = 0; // 0.7 kWh pro Waschgang
     let geschirspueler = 0; // 0.4 kWh pro spülgang
@@ -92,4 +95,50 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
 
     }
 
+
+
+   
+
+      function getGesamtPreis(marktpreis) {
+        // Annahme: Alle Werte sind in Cent
+    
+        // Kosten für die Strombeschaffung, Vertrieb und Gewinnmarge (Beispielwert)
+        let kostenStrombeschaffung = 13.54;
+    
+        // Steuern: Umsatzsteuer und Stromsteuer (Beispielwerte)
+        let umsatzsteuer = 19; // 19%
+        let stromsteuer = 2; // 2 Cent pro kWh
+    
+        // Netznutzungsentgelt inklusive Abrechnung (Beispielwert)
+        let netznutzungsentgelt = 8.12;
+    
+        // Messstellenbetrieb (Beispielwert)
+        let messstellenbetrieb = 5;
+    
+        // Umlagen (Beispielwerte)
+        let konzessionsabgabe = 2;// Abgabe
+        let umlageKWKG = 1;
+        let umlageStromNEV = 0.5;
+        let offshoreNetzumlage = 1;
+        let umlageAbschaltbareLasten = 0.5;
+    
+        // Berechnung des Gesamtpreises
+        let realPreis =
+            marktpreis +
+            kostenStrombeschaffung +
+            netznutzungsentgelt +
+            messstellenbetrieb +
+            (marktpreis * umsatzsteuer) / 100 +
+            (marktpreis * stromsteuer) / 100 +    
+            konzessionsabgabe +
+            umlageKWKG +
+            umlageStromNEV +
+            offshoreNetzumlage +
+            umlageAbschaltbareLasten;
+    
+        return realPreis;
+    }
+    
+  
+    
     module.exports = simulateEnergyManagement;

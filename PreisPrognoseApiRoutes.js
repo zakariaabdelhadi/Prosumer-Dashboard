@@ -21,19 +21,19 @@ const stromLocalPreisGauge = new prom_client.Gauge({
     name: 'strom_local_preis_metric', // The name of the metric
     help: 'gauge metric', // Help text describing the metric
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
-    registers: [routes1_module.wetter_register], // (Optional) Register the metric with the custom registry (default is the default registry)
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
   const stromMarketPreisGauge = new prom_client.Gauge({
     name: 'strom_market_preis_metric', // The name of the metric
     help: 'gauge metric', // Help text describing the metric
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
-    registers: [routes1_module.wetter_register], // (Optional) Register the metric with the custom registry (default is the default registry)
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
   const stromPreisGauge = new prom_client.Gauge({
     name: 'strom_preis_metric', // The name of the metric
     help: 'gauge metric', // Help text describing the metric
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
-    registers: [routes1_module.wetter_register], // (Optional) Register the metric with the custom registry (default is the default registry)
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
   let [m,t,s] = getCurrentTime();
 
@@ -105,6 +105,8 @@ try {
 
 });
 
+
+// aufgerufen wenn die API keine Antwort liefert 
 router.get("/preisOld", getPreiseOld, (req, res) => {
 
 
@@ -113,9 +115,6 @@ router.get("/preisOld", getPreiseOld, (req, res) => {
 
 
 function getPreiseOld(req, res, next) {
-
-
-
     let counter = 0;
     let value = 0;
 

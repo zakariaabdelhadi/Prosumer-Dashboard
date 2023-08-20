@@ -30,7 +30,6 @@ const erzeugterStromGauge = new prom_client.Gauge({
 
   router.get("/electGen", async (req, res) => {
 
-console.log( process.env.NREL_PVWATT_KEY)
     const options = {
       method: 'GET',
       url: 'https://developer.nrel.gov/api/pvwatts/v8.json',
@@ -65,6 +64,44 @@ console.log( process.env.NREL_PVWATT_KEY)
    
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//----------------------------------------- Irrelevant ----------------------------------------
 router.get("/vorhersage", getProducedElecInvorhersage, (req, res) => {
 
 

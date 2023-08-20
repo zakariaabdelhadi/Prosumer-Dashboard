@@ -5,6 +5,7 @@ const routes1_module = require('./WetterApiRoutes')
 const router2 = require('./StromGenApiRoutes')
 const router3 = require('./PreisPrognoseApiRoutes')
 const router4 = require('./VerbrauchApiRoutes.js')
+const metricsRoute = require('./metricsAbruf.js')
 const job = require('./job.js')
 
 const bodyparser = require('body-parser')
@@ -28,6 +29,7 @@ app.use("/api/wetter", routes1_module.router);
 app.use("/api/strom", router2);
 app.use("/api/markt", router3);
 app.use("/api/verbrauch", router4);
+app.use("/api/metrics",metricsRoute);
 
   // Starte den Job
 job();
