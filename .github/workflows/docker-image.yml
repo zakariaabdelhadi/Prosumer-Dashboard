@@ -6,7 +6,6 @@ on:
       - masterNew  # Change this to your main branch name
 
 jobs:
-    
   build:
     runs-on: ubuntu-latest
     
