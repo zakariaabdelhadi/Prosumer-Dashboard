@@ -17,6 +17,7 @@ jobs:
         echo OPEN_WEATHER_API=${{ secrets.WETTER_KEY }} >> .env
         echo NREL_PVWATT_KEY=${{ secrets.STROM_KEY }} >> .env
         echo PREISE_API_KEY=${{ secrets.PREIS_KEY }} >> .env
+        echo process.env.OPEN_WEATHER_API
 
     - name: Checkout code
       uses: actions/checkout@v2
