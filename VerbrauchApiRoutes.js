@@ -17,13 +17,12 @@ const { log } = require('console');
 const register = routes1_module.wetter_register;
 const stromVerbrauchGauge = new prom_client.Gauge({
     name: 'strom_verbrauch_metric', // The name of the metric
-    help: 'gauge metric Wh', // Help text describing the metric
+    help: 'gauge metric kWh', // Help text describing the metric
  //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
     registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
 
 
-  let [stunde,minute] = getCurrentTimeCustom();
   let [monat,tag,std,min] = getCurrentTime();
 
   
@@ -95,6 +94,7 @@ const stromVerbrauchGauge = new prom_client.Gauge({
 
     let counter = 0;
     let value = 0;
+    let [stunde,minute] = getCurrentTimeCustom();
 
 
     const readStream = fs.createReadStream('daten/ConsommationParHeure.csv', 'utf-8');
@@ -106,10 +106,13 @@ const stromVerbrauchGauge = new prom_client.Gauge({
         let zeit = line.split(';')[0];
         let verbrauch = parseInt(line.split(';')[1]);
 
+
+
   
         if (zeit == stunde+':'+minute ) {
+            
             value = verbrauch;
-            stromVerbrauchGauge.set(parseInt(value))
+            stromVerbrauchGauge.set(parseFloat(value/1000))
         }
 
 
@@ -127,6 +130,7 @@ const stromVerbrauchGauge = new prom_client.Gauge({
     readStream.on('end', () => {
 
      //   console.log(value.va)
+        stromVerbrauchGauge.set(parseFloat(value/1000));
         res.json({"value":value});
         console.log('Reading HaushaltsverbrauchDaten complete')
         next();
@@ -165,5 +169,6 @@ function getCurrentTime() {
     return [monat, tag, stunde,minute];
 
 }
+
 
 module.exports = router;

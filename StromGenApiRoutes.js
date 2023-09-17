@@ -55,16 +55,19 @@ const erzeugterStromGauge = new prom_client.Gauge({
         const response = await axios.request(options);
         let index = getCurrentHourIndexInYear();
         let value = response.data.outputs.ac[index]
-        erzeugterStromGauge.set(parseInt(value))
-
+        erzeugterStromGauge.set(parseFloat(value/1000))
         res.json({"value":value});
     } catch (error) {
-        console.error(error);
+
+        console.log('NREL_PVWATT API Außer betrieb - Daten aus der lokalen Datei holen ... ')
+        getProducedElecInCurrentHour(req,res);
+       // erzeugterStromGauge.set(parseFloat(800/1000))
+        //res.json({"value":800});
+     //   console.error(error);
+
     }
    
-
 });
-
 
 
 
@@ -217,7 +220,7 @@ function getProducedElecInCurrentHour(req, res, next) {
             console.log(monat + '/' + tag + '/' + stunde);
             // readStream.close();
             value = line.split(',')[10];
-            erzeugterStromGauge.set(parseInt(value));
+            erzeugterStromGauge.set(parseFloat(value/1000));
         }
     });
     rl.on('close', () => {
@@ -232,9 +235,12 @@ function getProducedElecInCurrentHour(req, res, next) {
     });
     readStream.on('end', () => {
 
-        res.json(value)
+        res.json({"value":value});
         console.log('Reading PV-Watts values complete')
-        next();
+
+        if(next != null){
+            next();
+        }
     });
 };
 

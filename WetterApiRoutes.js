@@ -42,6 +42,8 @@ router.get("/wetter-current", (req, res) => {
     // install node-fetch module
     //this link is to use for forecast 
     let stadt = 'berlin'
+
+
     let apiLink = 'https://api.openweathermap.org/data/2.5/weather?q=' + stadt + '&appid=' + OPEN_WEATHER_API + '&units=metric';
     fetch(apiLink)
         .then(fetchres => fetchres.json())
@@ -60,6 +62,19 @@ router.get("/wetter-current", (req, res) => {
 
                 });
 
+        }).catch(error => {
+          console.log('openweathe API Außer betrieb - Daten aus der lokalen Datei holen ... ')
+          res.json(
+            {
+                dt:  get_currentTime(),
+                date: get_currentTime(),
+                temperatur: '20', // celcius
+                Luftfeuchtigkeit: '80', // porcentage
+                Windgeschwindigkeit: '7', // meter per sekunde
+                clouds : '50' //pourcentage
+
+            });
+          // Verwenden Sie hier Standarddaten oder zeigen Sie eine Fehlermeldung an.
         });
 
 });
