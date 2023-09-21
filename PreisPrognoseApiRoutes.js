@@ -16,6 +16,26 @@ const prom_client = require('prom-client')
 
 let lock = 0;
 
+const options = {
+    method: 'GET',
+    url: 'https://marktdaten-deutschland.p.rapidapi.com/marketdata',
+    params: {zip: '10963'},
+    headers: {
+      'X-RapidAPI-Key': process.env.PREISE_API_KEY,
+      'X-RapidAPI-Host': 'marktdaten-deutschland.p.rapidapi.com'
+    }
+  };
+// let responceCach = await axios.request(options);
+let responceCachfunc = async () => {
+    const result = await axios.request(options);
+    return result
+  }
+let responceCach = null;
+  setInterval(async () =>  {
+    responceCach =  null;
+ }, 3600000);
+
+
 const register = routes1_module.wetter_register;
   const stromMarketPreisGauge = new prom_client.Gauge({
     name: 'strom_market_preis_metric', // The name of the metric
@@ -27,34 +47,17 @@ const register = routes1_module.wetter_register;
 
 router.get("/preis", async (req, res) => {
 
-
-
-const optionsOld = {
-    method: 'GET',
-    url: 'https://api.corrently.io/v2.0/gsi/marketdata',
-    params: {zip: '10963'},
-
-  };
-  
-  const options = {
-    method: 'GET',
-    url: 'https://marktdaten-deutschland.p.rapidapi.com/marketdata',
-    params: {zip: '10963'},
-    headers: {
-      'X-RapidAPI-Key': process.env.PREISE_API_KEY,
-      'X-RapidAPI-Host': 'marktdaten-deutschland.p.rapidapi.com'
-    }
-  };
+    let list=[];
+    let [tag,std,min] = getCurrentTimeCustom(); 
+   // tag=tag+1;
 
 try {
 
-	const response = await axios.request(options);
+    let response = responceCach == null ? await axios.request(options): responceCach;
+    responceCach = response;
+    let value = responceCach.data.data;
 
-    let value = response.data.data;
-    let list=[];
-
-    let [tag,std,min] = getCurrentTimeCustom(); 
-    tag=tag+1;
+    
 
     value.forEach(element => {
 
@@ -70,7 +73,7 @@ try {
         let startTime = new Intl.DateTimeFormat('de-DE', config).format(date1);
         let endTime = new Intl.DateTimeFormat('de-DE', config).format(date2);
 
-        if(tag == date1.getDate() && std == date1.getHours() && min == date1.getMinutes())
+        if(tag+'-'+std+'-'+min == date1.getDate()+'-'+date1.getHours()+'-'+date1.getMinutes())
         {    
             list.push({"marketPreis":marketPreis/10,"localPreis":localPreis/10,"startTime":startTime,"endTime":endTime});
  
@@ -78,14 +81,11 @@ try {
 
         
     });
+
    
-
-    stromMarketPreisGauge.set((parseFloat(list[0].marketPreis)))
-
-    res.json({"value":list[0].localPreis})
+res.json({"value":list[0].localPreis})
 } catch (error) {
     console.log('marktdaten-deutschland API Außer betrieb - Daten aus der lokalen Datei holen ... ')
-
     getPreiseTolerance(req,res);
 }
 

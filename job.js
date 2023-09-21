@@ -69,7 +69,7 @@ function getGesamtPreis(gh_preis) {
   // Annahme: Alle Werte sind in Cent
 
   // Kosten für die Strombeschaffung, Vertrieb und Gewinnmarge (Beispielwert)
-  let kostenStrombeschaffung = 8.54;
+  let kostenStrombeschaffung = 6.54;
 
   // Steuern: Umsatzsteuer und Stromsteuer (Beispielwerte)
   let umsatzsteuer = 5; // 19%
@@ -106,7 +106,7 @@ function getGesamtPreis(gh_preis) {
 }
   module.exports = function(){
 
-
+    console.log('---------------------' + new Date() + '----------------------');
     fetchAllUrls(urls);
     // Setze das Intervall für alle Viertelstunden (15 * 60 * 1000 ms = 900000 ms)
     setInterval(() => {
@@ -114,7 +114,7 @@ function getGesamtPreis(gh_preis) {
       console.log('---------------------' + new Date() + '----------------------');
       fetchAllUrls(urls);
 
-    }, 900000);
+    }, 3600000);
 
 
   }

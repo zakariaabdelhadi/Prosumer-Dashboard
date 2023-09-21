@@ -2,7 +2,7 @@ const routes1_module = require('./WetterApiRoutes')
 const prom_client = require('prom-client')
 
 const LOGER_PREFIX = "EMS-1: " ;
-const _20_cent = 15; 
+const _20_cent = 20; 
 
 const register = routes1_module.wetter_register;
 
@@ -67,8 +67,10 @@ const batterieStandGauge = new prom_client.Gauge({
   
 function simulateEnergyManagement(generatedPower, householdLoad, electricityPrice) { // Preis im cent
 
-  stromPreisGauge.set(electricityPrice); //preis pro kWh in cent
-  stromLocalPreisGauge.set(electricityPrice);
+  gekaufterStrom = 0;
+  eingespeisterStrom = 0;
+
+        stromPreisGauge.set(electricityPrice); //preis pro kWh in cent
  
         // was die Solaranlage momentan nicht leistet - nicht bedeckt
         const netLoad = householdLoad - generatedPower;
@@ -82,11 +84,11 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
         if (surplus > 0 && batterySOC < batteryCapacity ) { // Batterie laden
           console.log(LOGER_PREFIX + "Action : Batterie laden")
           const chargeAmount = surplus * Batterie_effizience;
-          batterySOC += chargeAmount/4;
+          batterySOC += chargeAmount;
       } else if(surplus > 0 && electricityPrice > _20_cent){ // Strom ins Netz einspeisen
           console.log(LOGER_PREFIX + "Action : Strom ins Netz einspeisen")
           eingespeisterStrom =surplus;
-      }else{
+      }else if (surplus > 0){
         console.log(LOGER_PREFIX + "Action : nichts machen trotz Überschuss")
       }
       
@@ -99,7 +101,7 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
               gekaufterStrom = dischargeAmount - batterySOC ;
               batterySOC = 0;
           }else{
-              batterySOC -= dischargeAmount/4;
+              batterySOC -= dischargeAmount;
           }
       }else if (surplus < 0 && batterySOC == 0 ){ // strom aus dem Netz
           console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")

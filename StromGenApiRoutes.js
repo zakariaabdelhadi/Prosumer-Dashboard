@@ -19,8 +19,39 @@ let heutevor = [], morgenvor = [], ubermorgenvor = [];
 let lockMonat1 = true;
 let lockMonat2 = true;
 
-const NREL_KEY =  'bRLrzOOFeHPpnRnqxxzskorqS298hf6JiND8iBFB'; 
 const register = routes1_module.wetter_register;
+
+const options = {
+    method: 'GET',
+    url: 'https://developer.nrel.gov/api/pvwatts/v8.json',
+    params: {
+      system_capacity: '15', //Die übliche Speicherkapazität für Ein- und Mehrfamilienhäuser liegt bei etwa 4 kW bis 16 kW.
+      module_type:'0',
+      losses: '10',
+      array_type:'1',
+      tilt:'30',
+      azimuth : '80',
+      dataset: 'intl',
+      timeframe:'hourly',
+      lat: '52.5162',
+      lon: '13.3777'
+    },
+    headers: {
+      'X-Api-Key': process.env.NREL_PVWATT_KEY,
+      'X-RapidAPI-Host': 'https://developer.nrel.gov'
+    }
+  };
+
+  let responceCachfunc = async () => {
+    const result = await axios.request(options);
+    return result
+  }
+let responceCach = null;
+  setInterval(async () =>  {
+    responceCach = null;
+ }, 3600000);
+
+
 const erzeugterStromGauge = new prom_client.Gauge({
     name: 'erzeugterStrom_metric', // The name of the metric
     help: 'gauge metric', // Help text describing the metric
@@ -30,31 +61,16 @@ const erzeugterStromGauge = new prom_client.Gauge({
 
   router.get("/electGen", async (req, res) => {
 
-    const options = {
-      method: 'GET',
-      url: 'https://developer.nrel.gov/api/pvwatts/v8.json',
-      params: {
-        system_capacity: '15', //Die übliche Speicherkapazität für Ein- und Mehrfamilienhäuser liegt bei etwa 4 kW bis 16 kW.
-        module_type:'0',
-        losses: '10',
-        array_type:'1',
-        tilt:'30',
-        azimuth : '80',
-        dataset: 'intl',
-        timeframe:'hourly',
-        lat: '52.5162',
-        lon: '13.3777'
-      },
-      headers: {
-        'X-Api-Key': process.env.NREL_PVWATT_KEY,
-        'X-RapidAPI-Host': 'https://developer.nrel.gov'
-      }
-    };
+   
     
+    let index = getCurrentHourIndexInYear();
+
     try {
-        const response = await axios.request(options);
-        let index = getCurrentHourIndexInYear();
-        let value = response.data.outputs.ac[index]
+
+        let response = responceCach == null ? await axios.request(options): responceCach;
+        responceCach = response;
+
+        let value = responceCach.data.outputs.ac[index]
         erzeugterStromGauge.set(parseFloat(value/1000))
         res.json({"value":value});
     } catch (error) {

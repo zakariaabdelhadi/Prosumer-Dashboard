@@ -3,7 +3,7 @@ const prom_client = require('prom-client')
 
 const LOGER_PREFIX = "EMS-3: " ;
 
-const _40_cent = 40; 
+const _40_cent = 30; 
 
 const register = routes1_module.wetter_register;
 
@@ -52,7 +52,10 @@ const batterieStandGauge = new prom_client.Gauge({
   
 function simulateEnergyManagement(generatedPower, householdLoad, electricityPrice) { // Preis im cent
  
-    
+        gekaufterStrom = 0;
+        eingespeisterStrom = 0;
+        stromPreisGauge.set(electricityPrice); //preis pro kWh in cent
+
         // was die Solaranlage momentan nicht leistet - nicht bedeckt
         const netLoad = householdLoad - generatedPower;
         // Berechne den Überschuss oder das Defizit
@@ -62,11 +65,11 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
         if (surplus > 0 && batterySOC < batteryCapacity && electricityPrice < _40_cent) { // Batterie laden
             console.log(LOGER_PREFIX +"Action : Batterie laden")
             const chargeAmount = surplus * Batterie_effizience;
-            batterySOC += chargeAmount/4;
+            batterySOC += chargeAmount;
         } else if(surplus > 0  && electricityPrice > _40_cent){ // Strom ins Netz einspeisen
             console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
             eingespeisterStrom =surplus;
-        }else 
+        }else if (surplus > 0)
         {
 
           console.log(LOGER_PREFIX + "Action : nichts machen trotz Überschuss")
@@ -81,7 +84,7 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
                 gekaufterStrom = dischargeAmount - batterySOC ;
                 batterySOC = 0;
             }else{
-                batterySOC -= dischargeAmount/4;
+                batterySOC -= dischargeAmount;
             }
         }else if (surplus < 0 && batterySOC == 0 ){ // strom aus dem Netz
             console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
@@ -97,49 +100,4 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
     }
 
 
-
-   
-
-      function getGesamtPreis(marktpreis) {
-        // Annahme: Alle Werte sind in Cent
-    
-        // Kosten für die Strombeschaffung, Vertrieb und Gewinnmarge (Beispielwert)
-        let kostenStrombeschaffung = 8.54;
-    
-        // Steuern: Umsatzsteuer und Stromsteuer (Beispielwerte)
-        let umsatzsteuer = 11; // 19%
-        let stromsteuer = 2; // 2 Cent pro kWh
-    
-        // Netznutzungsentgelt inklusive Abrechnung (Beispielwert)
-        let netznutzungsentgelt = 5.12;
-    
-        // Messstellenbetrieb (Beispielwert)
-        let messstellenbetrieb = 2;
-    
-        // Umlagen (Beispielwerte)
-        let konzessionsabgabe = 2;// Abgabe
-        let umlageKWKG = 1;
-        let umlageStromNEV = 0.5;
-        let offshoreNetzumlage = 1;
-        let umlageAbschaltbareLasten = 0.5;
-    
-        // Berechnung des Gesamtpreises
-        let realPreis =
-            marktpreis +
-            kostenStrombeschaffung +
-            netznutzungsentgelt +
-            messstellenbetrieb +
-            (marktpreis * umsatzsteuer) / 100 +
-            (marktpreis * stromsteuer) / 100 +    
-            konzessionsabgabe +
-            umlageKWKG +
-            umlageStromNEV +
-            offshoreNetzumlage +
-            umlageAbschaltbareLasten;
-    
-        return realPreis;
-    }
-    
-  
-    
     module.exports = simulateEnergyManagement;
