@@ -149,6 +149,7 @@ function getCurrentTimeCustom() {
     let minute = jetzt.getMinutes();
 
     minute = '00';
+    if (stunde < 9){ stunde = '0' + stunde}
 
 
 
@@ -163,8 +164,6 @@ function getCurrentTime() {
     let tag = jetzt.getDate();
     let stunde = jetzt.getHours();
     let minute = jetzt.getMinutes();
-
-
 
     return [monat, tag, stunde,minute];
 

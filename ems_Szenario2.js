@@ -37,13 +37,21 @@ const batterieStandGauge = new prom_client.Gauge({
     registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
   });
 
+  const GewinnCounter = new prom_client.Gauge({
+    name: 'gewinn_metric_s2', // The name of the metric
+    help: 'Gauge metric - gewinn minus ausgabe', // Help text describing the metric
+ //   labelNames: ['label1', 'label2'], // (Optional) Specify label names if your metric requires labels
+    registers: [register], // (Optional) Register the metric with the custom registry (default is the default registry)
+  });
+
  // let auto = 0;
-  const batteryCapacity = 8; // Beispielkapazität in kWh
+  const batteryCapacity = 3; // Beispielkapazität in kWh
   let batterySOC = 0.0; // Beispiel-Startladestand der Batterie in kWh
   let gekaufterStrom = 0;
   let eingespeisterStrom = 0;
   let Batterie_effizience = 0.7;
 
+  let Gewinn = 0;
 
  
 function simulateEnergyManagement(generatedPower, householdLoad, electricityPrice) { // Preis im cent
@@ -52,12 +60,11 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
   gekaufterStrom = 0;
   eingespeisterStrom = 0;
   
-  stromPreisGauge.set(electricityPrice); //preis pro kWh in cent
 
         // was die Solaranlage momentan nicht leistet - nicht bedeckt
-        const netLoad = householdLoad - generatedPower;
+        let netLoad = householdLoad - generatedPower;
         // Berechne den Überschuss oder das Defizit
-        const surplus = generatedPower - householdLoad;
+        let surplus = generatedPower - householdLoad;
         // Entscheidung basierend auf Überschuss/Defizit und Batterieladestand
 
   
@@ -65,7 +72,9 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
             console.log(LOGER_PREFIX +"Action : Batterie laden")
             const chargeAmount = surplus * Batterie_effizience;
             batterySOC += chargeAmount;
-        } else if(surplus > 0 && batterySOC > (batteryCapacity - 3)  && electricityPrice > _30_cent){ // Strom ins Netz einspeisen
+            if(batterySOC > batteryCapacity ) {batterySOC = batteryCapacity}
+
+        } else if(surplus > 0  && electricityPrice > _30_cent){ // Strom ins Netz einspeisen
             console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
             eingespeisterStrom =surplus;
         }else if (surplus > 0){
@@ -79,13 +88,16 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
             if(dischargeAmount > batterySOC){
                 console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
                 gekaufterStrom = dischargeAmount - batterySOC ;
+                netLoad = netLoad - gekaufterStrom;
                 batterySOC = 0;
             }else{
                 batterySOC -= dischargeAmount;
             }
-        }else if (surplus < 0 && batterySOC == 0 ){ // strom aus dem Netz
+        }
+        
+        if (surplus < 0 && batterySOC == 0 && netLoad > 0 ){ // strom aus dem Netz
             console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
-            gekaufterStrom = netLoad;
+            gekaufterStrom += netLoad;
         }
 
         batterieStandGauge.set(batterySOC);
@@ -94,6 +106,10 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
         eingespeisterStromCounter.set(eingespeisterStrom);
         earnStromCounter.set(eingespeisterStrom*electricityPrice)
 
+        Gewinn += eingespeisterStrom*electricityPrice;
+        Gewinn -= gekaufterStrom*electricityPrice;
+
+        GewinnCounter.set(Gewinn);
     }
 
 

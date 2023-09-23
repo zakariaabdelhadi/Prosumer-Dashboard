@@ -33,7 +33,7 @@ let responceCachfunc = async () => {
 let responceCach = null;
   setInterval(async () =>  {
     responceCach =  null;
- }, 3600000);
+ }, 14400000);
 
 
 const register = routes1_module.wetter_register;

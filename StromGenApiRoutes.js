@@ -49,7 +49,7 @@ const options = {
 let responceCach = null;
   setInterval(async () =>  {
     responceCach = null;
- }, 3600000);
+ }, 14400000);
 
 
 const erzeugterStromGauge = new prom_client.Gauge({
