@@ -50,7 +50,7 @@ const batterieStandGauge = new prom_client.Gauge({
   let batterySOC = 0.0; // Beispiel-Startladestand der Batterie in kWh
   let gekaufterStrom = 0;
   let eingespeisterStrom = 0;
-  let Batterie_effizience = 0.7;
+  let Batterie_effizience = 0.5;
 
   let Gewinn = 0;
 
