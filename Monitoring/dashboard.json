@@ -29,6 +29,19 @@
   "liveNow": false,
   "panels": [
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 61,
+      "panels": [],
+      "title": "Vergleich der Systeme",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "prometheus",
         "uid": "x8a3-kgSz"
@@ -52,7 +65,7 @@
               "tooltip": false,
               "viz": false
             },
-            "lineInterpolation": "linear",
+            "lineInterpolation": "smooth",
             "lineStyle": {
               "fill": "solid"
             },
@@ -92,7 +105,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 23,
       "options": {
@@ -107,6 +120,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "9.3.1",
       "targets": [
         {
           "datasource": {
@@ -114,8 +128,10 @@
             "uid": "x8a3-kgSz"
           },
           "editorMode": "builder",
+          "exemplar": false,
           "expr": "erzeugterStrom_metric",
-          "legendFormat": "__auto",
+          "instant": false,
+          "legendFormat": "erzeugter Strom",
           "range": true,
           "refId": "A"
         },
@@ -127,7 +143,7 @@
           "editorMode": "builder",
           "expr": "batterie_stand_metric",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Batteriestand",
           "range": true,
           "refId": "C"
         },
@@ -136,15 +152,16 @@
             "type": "prometheus",
             "uid": "x8a3-kgSz"
           },
-          "editorMode": "builder",
-          "expr": "strom_verbrauch_metric",
+          "editorMode": "code",
+          "expr": "strom_verbrauch_metric ",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Verbrauch",
           "range": true,
           "refId": "B"
         }
       ],
       "title": "EMS - 1",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -208,7 +225,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 0
+        "y": 1
       },
       "id": 25,
       "options": {
@@ -231,7 +248,7 @@
           },
           "editorMode": "builder",
           "expr": "erzeugterStrom_metric",
-          "legendFormat": "__auto",
+          "legendFormat": "erzeugter Strom",
           "range": true,
           "refId": "A"
         },
@@ -243,7 +260,7 @@
           "editorMode": "builder",
           "expr": "batterie_stand_metric_s2",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Batteriestand",
           "range": true,
           "refId": "B"
         },
@@ -255,12 +272,13 @@
           "editorMode": "builder",
           "expr": "strom_verbrauch_metric",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Verbrauch",
           "range": true,
           "refId": "C"
         }
       ],
       "title": "EMS - 2",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -327,7 +345,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 0
+        "y": 1
       },
       "id": 27,
       "options": {
@@ -350,7 +368,7 @@
           },
           "editorMode": "builder",
           "expr": "erzeugterStrom_metric",
-          "legendFormat": "__auto",
+          "legendFormat": "erzeugter Strom",
           "range": true,
           "refId": "A"
         },
@@ -362,7 +380,7 @@
           "editorMode": "builder",
           "expr": "batterie_stand_metric_s3",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Batteriestand",
           "range": true,
           "refId": "B"
         },
@@ -374,13 +392,27 @@
           "editorMode": "builder",
           "expr": "strom_verbrauch_metric",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Verbrauch",
           "range": true,
           "refId": "C"
         }
       ],
       "title": "EMS - 3",
+      "transparent": true,
       "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 63,
+      "panels": [],
+      "title": "Preise & Batteriestand",
+      "type": "row"
     },
     {
       "datasource": {
@@ -440,10 +472,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
+        "h": 6,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 9
       },
       "id": 8,
       "options": {
@@ -468,13 +500,216 @@
           "editorMode": "builder",
           "expr": "strom_preis_metric",
           "hide": false,
-          "legendFormat": "__auto",
+          "legendFormat": "Strompreis  Cents/kWh",
           "range": true,
           "refId": "C"
         }
       ],
       "title": "Preis im Cents/Kwh",
+      "transparent": true,
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "x8a3-kgSz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 15
+      },
+      "id": 55,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "x8a3-kgSz"
+          },
+          "editorMode": "builder",
+          "expr": "batterie_stand_metric",
+          "legendFormat": "Batteriestand",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Batteriestand EMS - 1",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "x8a3-kgSz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 15
+      },
+      "id": 57,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "x8a3-kgSz"
+          },
+          "editorMode": "builder",
+          "expr": "batterie_stand_metric_s2",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Batteriestand EMS - 2",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "x8a3-kgSz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 15
+      },
+      "id": 59,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "x8a3-kgSz"
+          },
+          "editorMode": "builder",
+          "expr": "batterie_stand_metric_s3",
+          "legendFormat": "Batteriestand",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Batteriestand EMS - 3",
+      "type": "gauge"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 22
+      },
+      "id": 65,
+      "panels": [],
+      "title": "Einspeisung / Strom aus den Netz ",
+      "type": "row"
     },
     {
       "datasource": {},
@@ -504,7 +739,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -534,7 +769,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 14
+        "y": 23
       },
       "id": 14,
       "options": {
@@ -568,6 +803,7 @@
         }
       ],
       "title": "Eingespeisung (kW) - EMS - 1",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -601,7 +837,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -631,7 +867,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 14
+        "y": 23
       },
       "id": 29,
       "options": {
@@ -660,6 +896,7 @@
         }
       ],
       "title": "Einspeisung (kW) - EMS - 2",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -693,7 +930,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -723,7 +960,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 14
+        "y": 23
       },
       "id": 31,
       "options": {
@@ -752,6 +989,7 @@
         }
       ],
       "title": "Einspeisung (kW) - EMS - 3",
+      "transparent": true,
       "type": "timeseries"
     },
     {
@@ -785,7 +1023,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -815,7 +1053,303 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 21
+        "y": 30
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "b6a1811e-ac61-40a9-bdbc-8ef1f0291156"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "gekaufter_strom_metric ",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "B",
+          "useBackend": false
+        }
+      ],
+      "title": "Gekaufter Strom kWh",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "x8a3-kgSz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 8,
+        "y": 30
+      },
+      "id": 39,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "x8a3-kgSz"
+          },
+          "editorMode": "builder",
+          "expr": "gekaufter_strom_metric_s2",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Gekaufter Strom kWh  EMS - 2",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "x8a3-kgSz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 16,
+        "y": 30
+      },
+      "id": 41,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "x8a3-kgSz"
+          },
+          "editorMode": "builder",
+          "expr": "gekaufter_strom_metric_s3",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Gekaufter Strom EMS - 3",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 37
+      },
+      "id": 67,
+      "panels": [],
+      "title": "Rechnungen",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "x8a3-kgSz"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 8,
+        "x": 0,
+        "y": 38
       },
       "id": 43,
       "options": {
@@ -877,7 +1411,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -907,7 +1441,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 21
+        "y": 38
       },
       "id": 45,
       "options": {
@@ -969,7 +1503,7 @@
               "type": "linear"
             },
             "showPoints": "auto",
-            "spanNulls": false,
+            "spanNulls": true,
             "stacking": {
               "group": "A",
               "mode": "none"
@@ -999,7 +1533,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 21
+        "y": 38
       },
       "id": 47,
       "options": {
@@ -1091,289 +1625,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 28
-      },
-      "id": 16,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "b6a1811e-ac61-40a9-bdbc-8ef1f0291156"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "gekaufter_strom_metric ",
-          "fullMetaSearch": false,
-          "hide": false,
-          "includeNullMetadata": true,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "B",
-          "useBackend": false
-        }
-      ],
-      "title": "Gekaufter Strom kWh",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "x8a3-kgSz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 8,
-        "y": 28
-      },
-      "id": 39,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "x8a3-kgSz"
-          },
-          "editorMode": "builder",
-          "expr": "gekaufter_strom_metric_s2",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "gekaufter Strom kWh  EMS - 2",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "x8a3-kgSz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 16,
-        "y": 28
-      },
-      "id": 41,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "x8a3-kgSz"
-          },
-          "editorMode": "builder",
-          "expr": "gekaufter_strom_metric_s3",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "gekaufter Strom EMS - 3",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "x8a3-kgSz"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 35
+        "y": 45
       },
       "id": 37,
       "options": {
@@ -1449,7 +1701,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1464,7 +1717,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 35
+        "y": 45
       },
       "id": 33,
       "options": {
@@ -1540,7 +1793,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1555,7 +1809,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 35
+        "y": 45
       },
       "id": 35,
       "options": {
@@ -1601,7 +1855,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1616,7 +1871,7 @@
         "h": 7,
         "w": 8,
         "x": 0,
-        "y": 42
+        "y": 52
       },
       "id": 49,
       "options": {
@@ -1638,14 +1893,14 @@
             "type": "prometheus",
             "uid": "x8a3-kgSz"
           },
-          "editorMode": "builder",
-          "expr": "gewinn_metric",
+          "editorMode": "code",
+          "expr": "gewinn_metric/100",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Netto Gewinn - Cents - EMS - 1",
+      "title": "Netto Gewinn - Euro - EMS - 1",
       "type": "gauge"
     },
     {
@@ -1663,7 +1918,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1678,7 +1934,7 @@
         "h": 7,
         "w": 8,
         "x": 8,
-        "y": 42
+        "y": 52
       },
       "id": 51,
       "options": {
@@ -1700,14 +1956,14 @@
             "type": "prometheus",
             "uid": "x8a3-kgSz"
           },
-          "editorMode": "builder",
-          "expr": "gewinn_metric_s2",
+          "editorMode": "code",
+          "expr": "gewinn_metric_s2/100",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Netto Gewinn Cents - EMS - 2",
+      "title": "Netto Gewinn Euro - EMS - 2",
       "type": "gauge"
     },
     {
@@ -1725,7 +1981,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green"
+                "color": "green",
+                "value": null
               },
               {
                 "color": "red",
@@ -1740,7 +1997,7 @@
         "h": 7,
         "w": 8,
         "x": 16,
-        "y": 42
+        "y": 52
       },
       "id": 53,
       "options": {
@@ -1762,111 +2019,18 @@
             "type": "prometheus",
             "uid": "x8a3-kgSz"
           },
-          "editorMode": "builder",
-          "expr": "gewinn_metric_s3",
+          "editorMode": "code",
+          "expr": "gewinn_metric_s3/100",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Netto Gewinn - Cents - EMS - 3",
+      "title": "Netto Gewinn - Euro - EMS - 3",
       "type": "gauge"
-    },
-    {
-      "datasource": {},
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": true,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green"
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 8,
-        "x": 0,
-        "y": 49
-      },
-      "id": 2,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "WHJeRG3Vk"
-          },
-          "disableTextWrap": false,
-          "editorMode": "builder",
-          "expr": "temperatur_metric{job=\"wetter-data\"}",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Temperutur - celcius",
-      "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": false,
   "schemaVersion": 37,
   "style": "dark",
   "tags": [],
@@ -1874,13 +2038,13 @@
     "list": []
   },
   "time": {
-    "from": "now-12h",
-    "to": "now"
+    "from": "2023-09-24T22:00:00.000Z",
+    "to": "2023-09-27T21:59:59.000Z"
   },
   "timepicker": {},
   "timezone": "",
   "title": "ProjektDashboard2",
   "uid": "WHJeRG3Vkm",
-  "version": 34,
+  "version": 48,
   "weekStart": ""
 }

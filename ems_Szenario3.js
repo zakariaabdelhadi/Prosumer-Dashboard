@@ -3,7 +3,7 @@ const prom_client = require('prom-client')
 
 const LOGER_PREFIX = "EMS-3: " ;
 
-const _40_cent = 30; 
+const ceuil = 30; 
 
 const register = routes1_module.wetter_register;
 
@@ -62,26 +62,30 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
         eingespeisterStrom = 0;
 
         // was die Solaranlage momentan nicht leistet - nicht bedeckt
-        const netLoad = householdLoad - generatedPower;
+        let netLoad = householdLoad - generatedPower;
         // Berechne den Überschuss oder das Defizit
-        const surplus = generatedPower - householdLoad;
+        let surplus = generatedPower - householdLoad;
         // Entscheidung basierend auf Überschuss/Defizit und Batterieladestand
 
-        if (surplus > 0 && batterySOC < batteryCapacity && electricityPrice < _40_cent) { // Batterie laden
-            console.log(LOGER_PREFIX +"Action : Batterie laden")
-            const chargeAmount = surplus * Batterie_effizience;
-            batterySOC += chargeAmount;
-            if(batterySOC > batteryCapacity ) {batterySOC = batteryCapacity}
-
-        } else if(surplus > 0  && electricityPrice > _40_cent){ // Strom ins Netz einspeisen
-            console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
-            eingespeisterStrom =surplus;
-        }else if (surplus > 0)
-        {
-
-          console.log(LOGER_PREFIX + "Action : nichts machen trotz Überschuss")
-
+        if(surplus > 0  && electricityPrice > ceuil){ // Strom ins Netz einspeisen
+          console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
+          eingespeisterStrom =surplus;
+  }else 
+     if (surplus > 0 && batterySOC < batteryCapacity && electricityPrice <= ceuil) { // Batterie laden
+        console.log(LOGER_PREFIX +"Action : Batterie laden")
+        ubrig = generatedPower - (batteryCapacity - batterySOC);
+        const chargeAmount = surplus * Batterie_effizience;
+        batterySOC += chargeAmount;
+        if(batterySOC > batteryCapacity ) {batterySOC = batteryCapacity}
+        if(ubrig > 0 && electricityPrice > 0){ 
+          console.log(LOGER_PREFIX + "Action : Übrigen Strom ins Netz einspeisen")
+          eingespeisterStrom = ubrig 
         }
+    }else         
+       if(surplus > 0 && batterySOC >= batteryCapacity){
+       console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
+       eingespeisterStrom =surplus;
+         }
         
         if (surplus < 0 && batterySOC > 0 && netLoad > 0 ) { // Strom aus der Batterie nutzen
             console.log(LOGER_PREFIX +"Action : Strom aus der Batterie nutzen")
@@ -94,9 +98,7 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
             }else{
                 batterySOC -= dischargeAmount;
             }
-        }
-        
-        if (surplus < 0 && batterySOC == 0 && netLoad > 0){ // strom aus dem Netz
+        }else if (surplus < 0 && batterySOC == 0 && netLoad > 0 ){ // strom aus dem Netz
             console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
             gekaufterStrom += netLoad;
         }

@@ -1,0 +1,493 @@
+[nodemon] 3.0.1
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,cjs,json
+[nodemon] starting `node index.js`
+---------------------Sun Sep 24 2023 23:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+app running on port: 5001
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 30.15591 Cents
+---------------------Mon Sep 25 2023 00:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 30.15591 Cents
+---------------------Mon Sep 25 2023 01:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 29.0292 Cents
+---------------------Mon Sep 25 2023 02:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.02 kWh  |  preis: 26.216169999999998 Cents
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Mon Sep 25 2023 03:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.016 kWh  |  preis: 25.04666 Cents
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Mon Sep 25 2023 04:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 18.5967 Cents
+---------------------Mon Sep 25 2023 05:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.987 kWh  |  preis: 15.3867 Cents
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Mon Sep 25 2023 06:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 1.053 kWh  |  preis: 26.726560000000003 Cents
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Mon Sep 25 2023 07:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.722 kWh  |  preis: 33.33916 Cents
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Mon Sep 25 2023 08:04:46 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.633063 kW  |  Cons: 0.2 kWh  |  preis: 33.36377 Cents
+EMS-1: Action : Batterie laden
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 09:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 4.372389 kW  |  Cons: 0 kWh  |  preis: 39.118230000000004 Cents
+EMS-1: Action : Batterie laden
+EMS-1: Action : Übrigen Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 10:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.1298650000000001 kW  |  Cons: 0.033 kWh  |  preis: 33.9833 Cents
+EMS-1: Action : Batterie laden
+EMS-1: Action : Übrigen Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 11:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.40474 kW  |  Cons: 0 kWh  |  preis: 22.13519 Cents
+EMS-1: Action : Batterie laden
+EMS-1: Action : Übrigen Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-3: Action : Batterie laden
+---------------------Mon Sep 25 2023 12:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 2.842089 kW  |  Cons: 0.5 kWh  |  preis: 25.94011 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Batterie laden
+EMS-3: Action : Übrigen Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 13:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 2.6697379999999997 kW  |  Cons: 0.987 kWh  |  preis: 24.847640000000002 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-2: Action : Übrigen Strom ins Netz einspeisen
+EMS-3: Action : Batterie laden
+EMS-3: Action : Übrigen Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 14:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 2.331491 kW  |  Cons: 0.5 kWh  |  preis: 19.23335 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-2: Action : Übrigen Strom ins Netz einspeisen
+EMS-3: Action : Batterie laden
+EMS-3: Action : Übrigen Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 15:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.806248 kW  |  Cons: 0 kWh  |  preis: 17.1843 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-2: Action : Übrigen Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 16:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.239067 kW  |  Cons: 0.987 kWh  |  preis: 21.78958 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Mon Sep 25 2023 17:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.830003 kW  |  Cons: 1.053 kWh  |  preis: 22.83604 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Mon Sep 25 2023 18:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.060749000000000004 kW  |  Cons: 2.072 kWh  |  preis: 28.99282 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Mon Sep 25 2023 19:04:48 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 2.044 kWh  |  preis: 52.63019 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Mon Sep 25 2023 20:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.4 kWh  |  preis: 52.6762 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Mon Sep 25 2023 21:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.04 kWh  |  preis: 40.5531 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Mon Sep 25 2023 22:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.036 kWh  |  preis: 37.17297 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Mon Sep 25 2023 23:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 34.2187 Cents
+---------------------Tue Sep 26 2023 00:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 32.51954 Cents
+---------------------Tue Sep 26 2023 01:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 28.00735 Cents
+---------------------Tue Sep 26 2023 02:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.02 kWh  |  preis: 29.53745 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 03:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.016 kWh  |  preis: 32.05516 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 04:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 30.77223 Cents
+---------------------Tue Sep 26 2023 05:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.987 kWh  |  preis: 23.08642 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 06:04:49 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 1.053 kWh  |  preis: 29.532100000000003 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+EMS-3: Action : strom aus dem Netz beziehen
+C:\Users\zzermani\Desktop\Projekt 2\APIs\ems_Szenario3.js:96
+                netLoad = netLoad - gekaufterStrom;
+                        ^
+
+TypeError: Assignment to constant variable.
+    at simulateEnergyManagement (C:\Users\zzermani\Desktop\Projekt 2\APIs\ems_Szenario3.js:96:25)
+    at fetchAllUrls (C:\Users\zzermani\Desktop\Projekt 2\APIs\job.js:63:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+
+Node.js v18.14.1
+[nodemon] app crashed - waiting for file changes before starting...
+[nodemon] restarting due to changes...
+[nodemon] starting `node index.js`
+---------------------Tue Sep 26 2023 11:11:19 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+app running on port: 5001
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 6.84487 kW  |  Cons: 0 kWh  |  preis: 26.949119999999997 Cents
+EMS-1: Action : Batterie laden
+EMS-1: Action : Übrigen Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen        
+EMS-3: Action : Batterie laden
+EMS-3: Action : Übrigen Strom ins Netz einspeisen
+---------------------Tue Sep 26 2023 12:11:19 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 6.049338 kW  |  Cons: 0.5 kWh  |  preis: 25.91978 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Tue Sep 26 2023 13:11:19 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 4.455625 kW  |  Cons: 0.987 kWh  |  preis: 27.44346 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Tue Sep 26 2023 14:11:19 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 2.49896 kW  |  Cons: 0.5 kWh  |  preis: 22.83711 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Tue Sep 26 2023 15:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.0323019999999998 kW  |  Cons: 0 kWh  |  preis: 23.81295 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Tue Sep 26 2023 16:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.874549 kW  |  Cons: 0.987 kWh  |  preis: 24.80805 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 17:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.666497 kW  |  Cons: 1.053 kWh  |  preis: 21.733940000000004 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 18:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.043535 kW  |  Cons: 2.072 kWh  |  preis: 23.481250000000003 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 19:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 2.044 kWh  |  preis: 48.6744 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 20:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.4 kWh  |  preis: 60.92162 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 21:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+openweathe API Außer betrieb - Daten aus der lokalen Datei holen ... 
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.04 kWh  |  preis: 35.89753 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 22:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)--------------------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.036 kWh  |  preis: 34.3364 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Tue Sep 26 2023 23:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 34.14059 Cents
+---------------------Wed Sep 27 2023 00:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 31.8112 Cents
+---------------------Wed Sep 27 2023 01:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 30.642760000000003 Cents
+---------------------Wed Sep 27 2023 02:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.02 kWh  |  preis: 26.478320000000004 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 03:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.016 kWh  |  preis: 30.1313 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 04:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 29.48823 Cents
+---------------------Wed Sep 27 2023 05:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.987 kWh  |  preis: 23.084280000000003 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Wed Sep 27 2023 06:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 1.053 kWh  |  preis: 29.49144 Cents
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Wed Sep 27 2023 07:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.722 kWh  |  preis: 40.113330000000005 Cents
+EMS-1: Action : strom aus dem Netz beziehen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : strom aus dem Netz beziehen
+---------------------Wed Sep 27 2023 08:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.272976 kW  |  Cons: 0.2 kWh  |  preis: 50.475210000000004 Cents
+EMS-1: Action : Batterie laden
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Wed Sep 27 2023 09:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.6894199999999999 kW  |  Cons: 0 kWh  |  preis: 38.500840000000004 Cents
+EMS-1: Action : Batterie laden
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Wed Sep 27 2023 10:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.068649 kW  |  Cons: 0.033 kWh  |  preis: 39.69496 Cents
+EMS-1: Action : Batterie laden
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Wed Sep 27 2023 11:11:20 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.3413320000000002 kW  |  Cons: 0 kWh  |  preis: 31.337189999999996 Cents
+EMS-1: Action : Batterie laden
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Strom ins Netz einspeisen
+---------------------Wed Sep 27 2023 12:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.468211 kW  |  Cons: 0.5 kWh  |  preis: 29.379089999999998 Cents
+EMS-1: Action : Batterie laden
+EMS-1: Action : Übrigen Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Batterie laden
+---------------------Wed Sep 27 2023 13:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.4447059999999998 kW  |  Cons: 0.987 kWh  |  preis: 27.91105 Cents
+EMS-1: Action : Batterie laden
+EMS-1: Action : Übrigen Strom ins Netz einspeisen
+EMS-2: Action : Strom ins Netz einspeisen
+EMS-3: Action : Batterie laden
+---------------------Wed Sep 27 2023 14:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 2.670687 kW  |  Cons: 0.5 kWh  |  preis: 23.647100000000002 Cents
+EMS-1: Action : Batterie laden
+EMS-1: Action : Übrigen Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-3: Action : Batterie laden
+EMS-3: Action : Übrigen Strom ins Netz einspeisen
+---------------------Wed Sep 27 2023 15:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.9990599999999998 kW  |  Cons: 0 kWh  |  preis: 23.031850000000002 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-2: Action : Übrigen Strom ins Netz einspeisen
+EMS-3: Action : Batterie laden
+EMS-3: Action : Übrigen Strom ins Netz einspeisen
+---------------------Wed Sep 27 2023 16:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 1.1166420000000001 kW  |  Cons: 0.987 kWh  |  preis: 21.971480000000003 Cents
+EMS-1: Action : Strom ins Netz einspeisen
+EMS-2: Action : Batterie laden
+EMS-2: Action : Übrigen Strom ins Netz einspeisen
+EMS-3: Action : Batterie laden
+EMS-3: Action : Übrigen Strom ins Netz einspeisen
+---------------------Wed Sep 27 2023 17:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.664562 kW  |  Cons: 1.053 kWh  |  preis: 24.09222 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 18:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0.025699000000000003 kW  |  Cons: 2.072 kWh  |  preis: 30.112039999999997 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 19:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 2.044 kWh  |  preis: 52.92551 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 20:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.4 kWh  |  preis: 45.31887999999999 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 21:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.04 kWh  |  preis: 38.63245 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 22:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0.036 kWh  |  preis: 38.07712 Cents
+EMS-1: Action : Strom aus der Batterie nutzen
+EMS-2: Action : strom aus dem Netz beziehen
+EMS-3: Action : Strom aus der Batterie nutzen
+---------------------Wed Sep 27 2023 23:11:21 GMT+0200 (Mitteleuropäische Sommerzeit)----------------------
+Data parsing Haushaltsverbrauchtsdaten completed
+Reading HaushaltsverbrauchDaten complete
+Gen: 0 kW  |  Cons: 0 kWh  |  preis: 33.35735 Cents
+
+

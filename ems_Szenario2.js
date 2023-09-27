@@ -2,7 +2,7 @@ const routes1_module = require('./WetterApiRoutes')
 const prom_client = require('prom-client')
 
 const LOGER_PREFIX = "EMS-2: " ;
-const _30_cent = 25; 
+const ceuil = 25; 
 
 const register = routes1_module.wetter_register;
 
@@ -68,37 +68,46 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
         // Entscheidung basierend auf Überschuss/Defizit und Batterieladestand
 
   
-        if (surplus > 0 && batterySOC < batteryCapacity && electricityPrice < _30_cent) { // Batterie laden
-            console.log(LOGER_PREFIX +"Action : Batterie laden")
-            const chargeAmount = surplus * Batterie_effizience;
-            batterySOC += chargeAmount;
-            if(batterySOC > batteryCapacity ) {batterySOC = batteryCapacity}
+        if(surplus > 0  && electricityPrice > ceuil){ // Strom ins Netz einspeisen
+          console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
+          eingespeisterStrom =surplus;
+  }else 
+     if (surplus > 0 && batterySOC < batteryCapacity && electricityPrice <= ceuil) { // Batterie laden
+        console.log(LOGER_PREFIX +"Action : Batterie laden")
+        ubrig = generatedPower - (batteryCapacity - batterySOC);
+        const chargeAmount = surplus * Batterie_effizience;
+        batterySOC += chargeAmount;
+        if(batterySOC > batteryCapacity ) {batterySOC = batteryCapacity}
+        if(ubrig > 0 && electricityPrice > 0){ 
+          console.log(LOGER_PREFIX + "Action : Übrigen Strom ins Netz einspeisen")
+          eingespeisterStrom = ubrig 
+        }
+    }else         
+       if(surplus > 0 && batterySOC >= batteryCapacity){
+       console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
+       eingespeisterStrom =surplus;
+         }
 
-        } else if(surplus > 0  && electricityPrice > _30_cent){ // Strom ins Netz einspeisen
-            console.log(LOGER_PREFIX +"Action : Strom ins Netz einspeisen")
-            eingespeisterStrom =surplus;
-        }else if (surplus > 0){
-          console.log(LOGER_PREFIX + "Action : nichts machen trotz Überschuss")
-        }
-        
-        
-        if (surplus < 0 && batterySOC > 0 && netLoad > 0 ) { // Strom aus der Batterie nutzen
-            console.log(LOGER_PREFIX +"Action : Strom aus der Batterie nutzen")
-            const dischargeAmount = netLoad * Batterie_effizience;
-            if(dischargeAmount > batterySOC){
-                console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
-                gekaufterStrom = dischargeAmount - batterySOC ;
-                netLoad = netLoad - gekaufterStrom;
-                batterySOC = 0;
-            }else{
-                batterySOC -= dischargeAmount;
-            }
-        }
-        
-        if (surplus < 0 && batterySOC == 0 && netLoad > 0 ){ // strom aus dem Netz
-            console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
-            gekaufterStrom += netLoad;
-        }
+
+if (surplus < 0 && batterySOC > 0 && netLoad > 0 ) { // Strom aus der Batterie nutzen
+    console.log(LOGER_PREFIX +"Action : Strom aus der Batterie nutzen")
+    const dischargeAmount = netLoad * Batterie_effizience;
+    if(dischargeAmount > batterySOC){
+        console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
+        gekaufterStrom = dischargeAmount - batterySOC ;
+        netLoad = netLoad - gekaufterStrom;
+
+        batterySOC = 0;
+    }else{
+        batterySOC -= dischargeAmount;
+    }
+}else 
+   if (surplus < 0 && batterySOC == 0 && netLoad > 0 ){ // strom aus dem Netz
+    console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
+    gekaufterStrom += netLoad;
+   }
+
+
 
         batterieStandGauge.set(batterySOC);
         gekaufterStromCounter.set(gekaufterStrom);
@@ -113,49 +122,6 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
     }
 
 
-
-   
-
-      function getGesamtPreis(marktpreis) {
-        // Annahme: Alle Werte sind in Cent
-    
-        // Kosten für die Strombeschaffung, Vertrieb und Gewinnmarge (Beispielwert)
-        let kostenStrombeschaffung = 8.54;
-    
-        // Steuern: Umsatzsteuer und Stromsteuer (Beispielwerte)
-        let umsatzsteuer = 11; // 19%
-        let stromsteuer = 2; // 2 Cent pro kWh
-    
-        // Netznutzungsentgelt inklusive Abrechnung (Beispielwert)
-        let netznutzungsentgelt = 5.12;
-    
-        // Messstellenbetrieb (Beispielwert)
-        let messstellenbetrieb = 2;
-    
-        // Umlagen (Beispielwerte)
-        let konzessionsabgabe = 2;// Abgabe
-        let umlageKWKG = 1;
-        let umlageStromNEV = 0.5;
-        let offshoreNetzumlage = 1;
-        let umlageAbschaltbareLasten = 0.5;
-    
-        // Berechnung des Gesamtpreises
-        let realPreis =
-            marktpreis +
-            kostenStrombeschaffung +
-            netznutzungsentgelt +
-            messstellenbetrieb +
-            (marktpreis * umsatzsteuer) / 100 +
-            (marktpreis * stromsteuer) / 100 +    
-            konzessionsabgabe +
-            umlageKWKG +
-            umlageStromNEV +
-            offshoreNetzumlage +
-            umlageAbschaltbareLasten;
-    
-        return realPreis;
-    }
-    
   
     
     module.exports = simulateEnergyManagement;

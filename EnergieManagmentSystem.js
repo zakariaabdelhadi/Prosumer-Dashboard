@@ -2,7 +2,7 @@ const routes1_module = require('./WetterApiRoutes')
 const prom_client = require('prom-client')
 
 const LOGER_PREFIX = "EMS-1: " ;
-const _20_cent = 20; 
+const ceuil = 20; 
 
 const register = routes1_module.wetter_register;
 
@@ -90,15 +90,21 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
         // Entscheidung basierend auf Überschuss/Defizit und Batterieladestand
 
   
+       
         if (surplus > 0 && batterySOC < batteryCapacity ) { // Batterie laden
           console.log(LOGER_PREFIX + "Action : Batterie laden")
-          const chargeAmount = surplus * Batterie_effizience;
+          ubrig = generatedPower - (batteryCapacity - batterySOC );
+          let chargeAmount = surplus * Batterie_effizience;
           batterySOC += chargeAmount;
           if(batterySOC > batteryCapacity ) {batterySOC = batteryCapacity}
-      } else if(surplus > 0 && electricityPrice > _20_cent){ // Strom ins Netz einspeisen
+          if(ubrig > 0 && electricityPrice > 0){ 
+            console.log(LOGER_PREFIX + "Action : Übrigen Strom ins Netz einspeisen")
+            eingespeisterStrom = ubrig 
+          }
+      } else if(surplus > 0 && electricityPrice > 0){ // Strom ins Netz einspeisen
           console.log(LOGER_PREFIX + "Action : Strom ins Netz einspeisen")
-          eingespeisterStrom =surplus;
-      }else if (surplus > 0){
+          eingespeisterStrom = surplus;
+      }else if(surplus > 0){
         console.log(LOGER_PREFIX + "Action : nichts machen trotz Überschuss")
       }
       
@@ -109,14 +115,11 @@ function simulateEnergyManagement(generatedPower, householdLoad, electricityPric
           if(dischargeAmount > batterySOC){
               console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
               gekaufterStrom = dischargeAmount - batterySOC ;
-              netLoad = netLoad - gekaufterStrom;
               batterySOC = 0;
           }else{
               batterySOC -= dischargeAmount;
           }
-      }
-      
-      
+      }else      
       if (surplus < 0 && batterySOC == 0 && netLoad > 0 ){ // strom aus dem Netz
           console.log(LOGER_PREFIX +"Action : strom aus dem Netz beziehen")
           gekaufterStrom += netLoad;
