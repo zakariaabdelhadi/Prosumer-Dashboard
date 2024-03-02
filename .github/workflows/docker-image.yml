@@ -3,7 +3,7 @@ name: Node.js CI/CD with Docker
 on:
   push:
     branches:
-      - masterNew  # Change this to your main branch name
+      - safeBranch2  # Change this to your main branch name
 
 jobs:
     
